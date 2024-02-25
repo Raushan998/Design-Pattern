@@ -1,3 +1,5 @@
+# Single Responsibility Principle
+
 class Marker
     attr_reader :name, :color, :year, :price
     
