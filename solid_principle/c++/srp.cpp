@@ -5,6 +5,7 @@ using namespace std;
 class User {
 public:
     string username, password, email, name;
+    bool is_login = false;
     User(const string& username, const string& password, const string& email, const string& name)
         : username(username), password(password), email(email), name(name) {}
     
@@ -12,7 +13,7 @@ public:
 
 class InterfaceUser {
 public:
-    virtual bool login(const User* user, const string& username, const string& password) const = 0;
+    virtual bool login(User* user, const string& username, const string& password) const = 0;
     virtual User* registerUser(const string& username, const string& password, const string& email, const string& name) const = 0;
     virtual ~InterfaceUser() {}
 };
@@ -31,13 +32,14 @@ public:
 
 class UserManagement: public InterfaceUser{
     public:
-    bool login(const User* user, const string& username, const string& password) const override{
+    bool login(User* user, const string& username, const string& password) const override{
         if(username != user->username && password != user->password){
-            cout<<"User can't be loggedin";
+            cout<<"User can't be loggedin"<<endl;
             return false;
         }
         else{
-            cout<<"You are successfully logged in";
+            user->is_login = true;
+            cout<<"You are successfully logged in"<<endl;
         }
         return true;
     }
@@ -45,6 +47,12 @@ class UserManagement: public InterfaceUser{
     User* registerUser(const string& username, const string& password, const string& email, const string& name) const override{
         User* user = new User(username, password, email, name);
         return user;
+    }
+
+    bool is_login(const User* user){
+        if(user->is_login)
+           return true;
+        return false;
     }
 };
 
@@ -57,15 +65,21 @@ public:
     }
 
     bool sendEmail(const string& email_content) const override {
-        cout << "Email has been sent to " << user->email << " with content:" << endl;
-        cout << email_content << endl;
-        return true;
+        if(user->is_login){
+            cout << "Email has been sent to " << user->email << " with content:" << endl;
+            cout << email_content << endl;
+            return true;
+        }
+        else
+          cout<<"User is not logged in"<<endl;
+        return false;
     }
 };
 
 int main() {
     UserManagement* user_management = new UserManagement();
     User* user = user_management->registerUser("Raushan998", "12345678", "raushan@yopmail.com", "Raushan");
+    user_management->login(user, "Raushan998", "12345678");
     EmailService* email_service = new EmailService(user);
     email_service->sendEmail("This is to inform you that we are writing this to github.");
 
