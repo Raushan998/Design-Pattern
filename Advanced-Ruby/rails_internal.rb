@@ -83,7 +83,12 @@ module ModelClass
     end
 end
 
-class Post
+class ActiveRecord
+    include SimpleValidation
+    include ModelClass
+end
+
+class Post < ActiveRecord
     attr_accessor :description, :title
 
     def title
@@ -95,12 +100,11 @@ class Post
     end
 end
 
-class Comment
+class Comment < ActiveRecord
 end
 
-class User
-    include SimpleValidation
-    include ModelClass
+class User < ActiveRecord
+    
     attr_accessor :email, :name
     validates :name, presence: true
     validates :email, presence: true
