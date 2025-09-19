@@ -34,7 +34,7 @@ class Workflow
         @data[:input] = input
         @tasks.each do |current_task|
             begin
-                next unless current_task[:condition].nil? || current_task[:condition].call(@data)
+                next unless current_task[:condition_lambda].nil? || current_task[:condition_lambda].call(@data)
 
                 current_task[:block].call(@data) do |yielded|
                     @data = yielded
@@ -54,7 +54,7 @@ workflow.task("Validate Input", ->(d) { !d[:input].nil? }) do |data, &next_step|
 end
 
 workflow.task("Double the number") do |data, &next_step|
-  next_step.call(data.merge(result: data[:input] * 2))
+  next_step.call(data.merge(result: data[:input] ** 2))
 end
 
 workflow.task("Only keep even", ->(d) { d[:result].even? }) do |data, &next_step|
