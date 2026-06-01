@@ -1,7 +1,12 @@
 module SingletonModule
     def self.included(base)
+        base.instance_variable_set(:@mutex, Mutex.new)
         def base.instance
-            @instance ||= new
+            return @instance if @instance
+            @mutex.synchronize do
+                @instance ||= new
+            end
+            @instance
         end
     end
 end
