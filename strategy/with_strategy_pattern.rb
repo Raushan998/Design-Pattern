@@ -1,5 +1,5 @@
 module PaymentStrategy
-    def make_payment
+    def process_payment
         raise "Not Implemented Error"
     end
 end
