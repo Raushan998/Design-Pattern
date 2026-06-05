@@ -15,6 +15,7 @@ A collection of design pattern implementations and object-oriented design exerci
 ### Structural
 | Pattern | Directory | Language |
 |---------|-----------|----------|
+| Adapter | `adapter-design-pattern/` | Python |
 | Decorator | `Decorator/` | Ruby |
 
 ### Behavioral
