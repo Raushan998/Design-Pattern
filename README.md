@@ -16,6 +16,7 @@ A collection of design pattern implementations and object-oriented design exerci
 | Pattern | Directory | Language |
 |---------|-----------|----------|
 | Adapter | `adapter-design-pattern/` | Python |
+| Composite | `composite-pattern/` | Python |
 | Decorator | `Decorator/`, `decorator-design-pattern/` | Ruby, Python |
 | Proxy | `proxy-pattern/` | Python |
 
