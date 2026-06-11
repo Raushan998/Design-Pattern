@@ -19,6 +19,7 @@ A collection of design pattern implementations and object-oriented design exerci
 | Composite | `composite-pattern/` | Python |
 | Decorator | `Decorator/`, `decorator-design-pattern/` | Ruby, Python |
 | Facade | `facade-pattern/` | Python |
+| Flyweight | `fly-weight-pattern/` | Python |
 | Proxy | `proxy-pattern/` | Python |
 
 ### Behavioral
